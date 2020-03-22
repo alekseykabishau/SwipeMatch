@@ -14,6 +14,7 @@
 		5B489F642426B57200FD9222 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B489F632426B57200FD9222 /* Assets.xcassets */; };
 		5B489F672426B57200FD9222 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B489F652426B57200FD9222 /* LaunchScreen.storyboard */; };
 		5B489F6F2426B96C00FD9222 /* Extensions+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B489F6E2426B96C00FD9222 /* Extensions+UIView.swift */; };
+		5B642E702427D7B5008C5D35 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B642E6F2427D7B5008C5D35 /* CardView.swift */; };
 		5BD5EF2B2426CC6400F983EC /* HomeButtomControlsStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD5EF2A2426CC6400F983EC /* HomeButtomControlsStackView.swift */; };
 		5BD5EF2D2426DBE500F983EC /* TopNavigationStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD5EF2C2426DBE500F983EC /* TopNavigationStackView.swift */; };
 /* End PBXBuildFile section */
@@ -28,6 +29,7 @@
 		5B489F662426B57200FD9222 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5B489F682426B57200FD9222 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5B489F6E2426B96C00FD9222 /* Extensions+UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extensions+UIView.swift"; sourceTree = "<group>"; };
+		5B642E6F2427D7B5008C5D35 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		5BD5EF2A2426CC6400F983EC /* HomeButtomControlsStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeButtomControlsStackView.swift; sourceTree = "<group>"; };
 		5BD5EF2C2426DBE500F983EC /* TopNavigationStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNavigationStackView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -81,8 +83,9 @@
 		5BD5EF292426CC3600F983EC /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				5BD5EF2A2426CC6400F983EC /* HomeButtomControlsStackView.swift */,
 				5BD5EF2C2426DBE500F983EC /* TopNavigationStackView.swift */,
+				5BD5EF2A2426CC6400F983EC /* HomeButtomControlsStackView.swift */,
+				5B642E6F2427D7B5008C5D35 /* CardView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -179,6 +182,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B642E702427D7B5008C5D35 /* CardView.swift in Sources */,
 				5B489F5F2426B56D00FD9222 /* ViewController.swift in Sources */,
 				5B489F5B2426B56D00FD9222 /* AppDelegate.swift in Sources */,
 				5BD5EF2B2426CC6400F983EC /* HomeButtomControlsStackView.swift in Sources */,
