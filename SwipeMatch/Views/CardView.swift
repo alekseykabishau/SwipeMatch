@@ -11,6 +11,9 @@ import UIKit
 class CardView: UIView {
     
     private let imageView = UIImageView(image: #imageLiteral(resourceName: "kelly3"))
+    
+    // configuration
+    private let threshold: CGFloat = 150
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -29,15 +32,15 @@ class CardView: UIView {
     @objc func handlePan(gesture: UIPanGestureRecognizer) {
         switch gesture.state {
         case .changed:
-            handleChange(gesture: gesture)
+            handleChange(gesture)
         case .ended:
-            handleEnded()
+            handleEnded(gesture)
         default:
             ()
         }
     }
     
-    private func handleChange(gesture: UIPanGestureRecognizer) {
+    private func handleChange(_ gesture: UIPanGestureRecognizer) {
         
         let translation = gesture.translation(in: nil)
 
@@ -48,10 +51,28 @@ class CardView: UIView {
         self.transform = rotationalTransformation.translatedBy(x: translation.x, y: translation.y)
     }
     
-    private func handleEnded() {
+    private func handleEnded(_ gesture: UIPanGestureRecognizer) {
+        
+        let shouldDisminssCard: Bool
+        let translation = gesture.translation(in: nil)
+        
+        switch translation.x {
+        case -threshold...threshold:
+            shouldDisminssCard = false
+        default:
+            shouldDisminssCard = true
+        }
+        
         UIView.animate(withDuration: 0.75, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            
+            if shouldDisminssCard {
+                self.transform = self.transform.translatedBy(x: translation.x > 0 ? 1000 : -1000, y: 0)
+            } else {
+                self.transform = .identity
+            }
+        }, completion: { _ in
             self.transform = .identity
-        }, completion: nil)
+        })
     }
     
     required init?(coder: NSCoder) {
