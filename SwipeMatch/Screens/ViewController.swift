@@ -36,6 +36,7 @@ class ViewController: UIViewController {
         overallstackView.isLayoutMarginsRelativeArrangement = true
         overallstackView.layoutMargins = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12)
         
+        overallstackView.bringSubviewToFront(cardDeckView) // overlay buttons when card is moving
     }
 }
 
