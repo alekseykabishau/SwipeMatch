@@ -56,15 +56,17 @@ class CardView: UIView {
         let translationDirection: CGFloat = gesture.translation(in: nil).x > 0 ? 1 : -1
         let shouldDismissCard = abs(gesture.translation(in: nil).x) > threshold
         
-        UIView.animate(withDuration: 0.75, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             
             if shouldDismissCard {
-                self.transform = self.transform.translatedBy(x: 1000 * translationDirection, y: 0)
+                self.transform = self.transform.translatedBy(x: 600 * translationDirection, y: 0)
             } else {
                 self.transform = .identity
             }
         }, completion: { _ in
-            self.transform = .identity
+            if shouldDismissCard {
+                self.removeFromSuperview()
+            }
         })
     }
     
