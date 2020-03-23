@@ -10,7 +10,8 @@ import UIKit
 
 class CardView: UIView {
     
-    private let imageView = UIImageView(image: #imageLiteral(resourceName: "kelly3"))
+    var imageView = UIImageView(image: #imageLiteral(resourceName: "kelly3"))
+    let infoLabel = UILabel()
     
     // configuration
     private let threshold: CGFloat = 150
@@ -24,6 +25,12 @@ class CardView: UIView {
         addSubview(imageView)
         imageView.fillSuperview()
         imageView.contentMode = .scaleAspectFill
+        
+        addSubview(infoLabel)
+        infoLabel.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: UIEdgeInsets(top: 0, left: 16, bottom: 16, right: 0))
+        infoLabel.textColor = .white
+        infoLabel.font = UIFont.systemFont(ofSize: 34, weight: .heavy)
+        infoLabel.numberOfLines = 0
         
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
         addGestureRecognizer(panGesture)
