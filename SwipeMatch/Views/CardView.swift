@@ -53,20 +53,13 @@ class CardView: UIView {
     
     private func handleEnded(_ gesture: UIPanGestureRecognizer) {
         
-        let shouldDisminssCard: Bool
-        let translation = gesture.translation(in: nil)
-        
-        switch translation.x {
-        case -threshold...threshold:
-            shouldDisminssCard = false
-        default:
-            shouldDisminssCard = true
-        }
+        let translationDirection: CGFloat = gesture.translation(in: nil).x > 0 ? 1 : -1
+        let shouldDismissCard = abs(gesture.translation(in: nil).x) > threshold
         
         UIView.animate(withDuration: 0.75, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             
-            if shouldDisminssCard {
-                self.transform = self.transform.translatedBy(x: translation.x > 0 ? 1000 : -1000, y: 0)
+            if shouldDismissCard {
+                self.transform = self.transform.translatedBy(x: 1000 * translationDirection, y: 0)
             } else {
                 self.transform = .identity
             }
