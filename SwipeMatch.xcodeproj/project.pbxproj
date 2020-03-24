@@ -16,6 +16,7 @@
 		5B489F672426B57200FD9222 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B489F652426B57200FD9222 /* LaunchScreen.storyboard */; };
 		5B489F6F2426B96C00FD9222 /* Extensions+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B489F6E2426B96C00FD9222 /* Extensions+UIView.swift */; };
 		5B642E702427D7B5008C5D35 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B642E6F2427D7B5008C5D35 /* CardView.swift */; };
+		5BB8C3922429A0A100B9C0D8 /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB8C3912429A0A100B9C0D8 /* CardViewModel.swift */; };
 		5BD5EF2B2426CC6400F983EC /* HomeButtomControlsStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD5EF2A2426CC6400F983EC /* HomeButtomControlsStackView.swift */; };
 		5BD5EF2D2426DBE500F983EC /* TopNavigationStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD5EF2C2426DBE500F983EC /* TopNavigationStackView.swift */; };
 /* End PBXBuildFile section */
@@ -32,6 +33,7 @@
 		5B489F682426B57200FD9222 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5B489F6E2426B96C00FD9222 /* Extensions+UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extensions+UIView.swift"; sourceTree = "<group>"; };
 		5B642E6F2427D7B5008C5D35 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		5BB8C3912429A0A100B9C0D8 /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
 		5BD5EF2A2426CC6400F983EC /* HomeButtomControlsStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeButtomControlsStackView.swift; sourceTree = "<group>"; };
 		5BD5EF2C2426DBE500F983EC /* TopNavigationStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNavigationStackView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -74,6 +76,7 @@
 		5B489F592426B56C00FD9222 /* SwipeMatch */ = {
 			isa = PBXGroup;
 			children = (
+				5BB8C3902429A08900B9C0D8 /* ViewModels */,
 				5B08A08024284BB200C073F8 /* Model */,
 				5BD5EF292426CC3600F983EC /* Views */,
 				5B489F702426B97600FD9222 /* Extensions */,
@@ -89,6 +92,14 @@
 				5B489F6E2426B96C00FD9222 /* Extensions+UIView.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		5BB8C3902429A08900B9C0D8 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				5BB8C3912429A0A100B9C0D8 /* CardViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		5BD5EF292426CC3600F983EC /* Views */ = {
@@ -201,6 +212,7 @@
 				5BD5EF2D2426DBE500F983EC /* TopNavigationStackView.swift in Sources */,
 				5B489F6F2426B96C00FD9222 /* Extensions+UIView.swift in Sources */,
 				5B489F5D2426B56D00FD9222 /* SceneDelegate.swift in Sources */,
+				5BB8C3922429A0A100B9C0D8 /* CardViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
