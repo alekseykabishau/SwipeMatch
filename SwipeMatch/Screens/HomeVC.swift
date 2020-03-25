@@ -35,10 +35,7 @@ class HomeVC: UIViewController {
         
         cardViewModels.forEach { (cardViewModel) in
             let cardView = CardView(frame: .zero)
-            cardView.imageView.image = UIImage(named: cardViewModel.imageName)
-            cardView.infoLabel.attributedText = cardViewModel.attributedString
-            cardView.infoLabel.textAlignment = cardViewModel.textAlignment
-                
+            cardView.cardViewModel = cardViewModel
             cardDeckView.addSubview(cardView)
             cardView.fillSuperview()
         }
