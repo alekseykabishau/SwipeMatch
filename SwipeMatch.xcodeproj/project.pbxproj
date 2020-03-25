@@ -16,6 +16,7 @@
 		5B489F672426B57200FD9222 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B489F652426B57200FD9222 /* LaunchScreen.storyboard */; };
 		5B489F6F2426B96C00FD9222 /* Extensions+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B489F6E2426B96C00FD9222 /* Extensions+UIView.swift */; };
 		5B642E702427D7B5008C5D35 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B642E6F2427D7B5008C5D35 /* CardView.swift */; };
+		5B6534AA242ADE3100921D51 /* Advertiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6534A9242ADE3100921D51 /* Advertiser.swift */; };
 		5BB8C3922429A0A100B9C0D8 /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB8C3912429A0A100B9C0D8 /* CardViewModel.swift */; };
 		5BD5EF2B2426CC6400F983EC /* HomeButtomControlsStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD5EF2A2426CC6400F983EC /* HomeButtomControlsStackView.swift */; };
 		5BD5EF2D2426DBE500F983EC /* TopNavigationStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD5EF2C2426DBE500F983EC /* TopNavigationStackView.swift */; };
@@ -33,6 +34,7 @@
 		5B489F682426B57200FD9222 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5B489F6E2426B96C00FD9222 /* Extensions+UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extensions+UIView.swift"; sourceTree = "<group>"; };
 		5B642E6F2427D7B5008C5D35 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		5B6534A9242ADE3100921D51 /* Advertiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Advertiser.swift; sourceTree = "<group>"; };
 		5BB8C3912429A0A100B9C0D8 /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
 		5BD5EF2A2426CC6400F983EC /* HomeButtomControlsStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeButtomControlsStackView.swift; sourceTree = "<group>"; };
 		5BD5EF2C2426DBE500F983EC /* TopNavigationStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNavigationStackView.swift; sourceTree = "<group>"; };
@@ -53,6 +55,7 @@
 			isa = PBXGroup;
 			children = (
 				5B08A08124284BBF00C073F8 /* User.swift */,
+				5B6534A9242ADE3100921D51 /* Advertiser.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -204,6 +207,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B6534AA242ADE3100921D51 /* Advertiser.swift in Sources */,
 				5B642E702427D7B5008C5D35 /* CardView.swift in Sources */,
 				5B489F5F2426B56D00FD9222 /* HomeVC.swift in Sources */,
 				5B489F5B2426B56D00FD9222 /* AppDelegate.swift in Sources */,
