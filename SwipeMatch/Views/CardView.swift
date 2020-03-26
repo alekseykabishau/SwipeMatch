@@ -19,32 +19,30 @@ class CardView: UIView {
     }
     
     private var imageView = UIImageView()
-    private let infoLabel = UILabel()
     private let gradientLayer = CAGradientLayer()
+    private let infoLabel = UILabel()
     
-    // configuration
     private let threshold: CGFloat = 150
 
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         layer.cornerRadius = 10
         clipsToBounds = true
         
+        configureImageView()
+        setupGradientLayer() // z-index important in this case
+        configureInfoLabel()
+        
+        addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handlePan)))
+    }
+    
+    
+    private func configureImageView() {
         addSubview(imageView)
         imageView.fillSuperview()
         imageView.contentMode = .scaleAspectFill
-        
-        setupGradientLayer() // z-index important in this case
-        
-        addSubview(infoLabel)
-        infoLabel.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: UIEdgeInsets(top: 0, left: 16, bottom: 16, right: 0))
-        infoLabel.textColor = .white
-        infoLabel.font = UIFont.systemFont(ofSize: 34, weight: .heavy)
-        infoLabel.numberOfLines = 0
-        
-        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
-        addGestureRecognizer(panGesture)
     }
     
     
@@ -53,6 +51,15 @@ class CardView: UIView {
         gradientLayer.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
         gradientLayer.locations = [0.5, 1.1] // clear start at 50% and black goes below
         layer.addSublayer(gradientLayer)
+    }
+    
+    
+    private func configureInfoLabel() {
+        addSubview(infoLabel)
+        infoLabel.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: UIEdgeInsets(top: 0, left: 16, bottom: 16, right: 0))
+        infoLabel.textColor = .white
+        infoLabel.font = UIFont.systemFont(ofSize: 34, weight: .heavy)
+        infoLabel.numberOfLines = 0
     }
     
     
@@ -73,6 +80,7 @@ class CardView: UIView {
         }
     }
     
+    
     private func handleChange(_ gesture: UIPanGestureRecognizer) {
         
         let translation = gesture.translation(in: nil)
@@ -83,6 +91,7 @@ class CardView: UIView {
         let rotationalTransformation = CGAffineTransform(rotationAngle: angle)
         self.transform = rotationalTransformation.translatedBy(x: translation.x, y: translation.y)
     }
+    
     
     private func handleEnded(_ gesture: UIPanGestureRecognizer) {
         
