@@ -20,6 +20,7 @@ class CardView: UIView {
     
     private var imageView = UIImageView()
     private let infoLabel = UILabel()
+    private let gradientLayer = CAGradientLayer()
     
     // configuration
     private let threshold: CGFloat = 150
@@ -34,6 +35,8 @@ class CardView: UIView {
         imageView.fillSuperview()
         imageView.contentMode = .scaleAspectFill
         
+        setupGradientLayer() // z-index important in this case
+        
         addSubview(infoLabel)
         infoLabel.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: UIEdgeInsets(top: 0, left: 16, bottom: 16, right: 0))
         infoLabel.textColor = .white
@@ -44,7 +47,22 @@ class CardView: UIView {
         addGestureRecognizer(panGesture)
     }
     
-    @objc func handlePan(gesture: UIPanGestureRecognizer) {
+    
+    private func setupGradientLayer() {
+        // frame is set in layoutSubviews
+        gradientLayer.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
+        gradientLayer.locations = [0.5, 1.1] // clear start at 50% and black goes below
+        layer.addSublayer(gradientLayer)
+    }
+    
+    
+    // can get access to card frame property because it's set to .zero during init
+    override func layoutSubviews() {
+        gradientLayer.frame = self.frame
+    }
+    
+    
+    @objc private func handlePan(gesture: UIPanGestureRecognizer) {
         switch gesture.state {
         case .changed:
             handleChange(gesture)
