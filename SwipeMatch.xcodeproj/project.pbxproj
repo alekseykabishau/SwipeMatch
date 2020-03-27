@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5B08A08224284BBF00C073F8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B08A08124284BBF00C073F8 /* User.swift */; };
+		5B364903242D9EAB00421F88 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B364902242D9EAB00421F88 /* Constants.swift */; };
 		5B489F5B2426B56D00FD9222 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B489F5A2426B56D00FD9222 /* AppDelegate.swift */; };
 		5B489F5D2426B56D00FD9222 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B489F5C2426B56D00FD9222 /* SceneDelegate.swift */; };
 		5B489F5F2426B56D00FD9222 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B489F5E2426B56D00FD9222 /* HomeVC.swift */; };
@@ -24,6 +25,7 @@
 
 /* Begin PBXFileReference section */
 		5B08A08124284BBF00C073F8 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		5B364902242D9EAB00421F88 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		5B489F572426B56C00FD9222 /* SwipeMatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwipeMatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B489F5A2426B56D00FD9222 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5B489F5C2426B56D00FD9222 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -60,6 +62,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		5B364901242D9E9800421F88 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				5B364902242D9EAB00421F88 /* Constants.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		5B489F4E2426B56C00FD9222 = {
 			isa = PBXGroup;
 			children = (
@@ -79,6 +89,7 @@
 		5B489F592426B56C00FD9222 /* SwipeMatch */ = {
 			isa = PBXGroup;
 			children = (
+				5B364901242D9E9800421F88 /* Utilities */,
 				5BB8C3902429A08900B9C0D8 /* ViewModels */,
 				5B08A08024284BB200C073F8 /* Model */,
 				5BD5EF292426CC3600F983EC /* Views */,
@@ -208,6 +219,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5B6534AA242ADE3100921D51 /* Advertiser.swift in Sources */,
+				5B364903242D9EAB00421F88 /* Constants.swift in Sources */,
 				5B642E702427D7B5008C5D35 /* CardView.swift in Sources */,
 				5B489F5F2426B56D00FD9222 /* HomeVC.swift in Sources */,
 				5B489F5B2426B56D00FD9222 /* AppDelegate.swift in Sources */,
