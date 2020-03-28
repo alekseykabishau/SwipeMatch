@@ -98,8 +98,7 @@ class CardView: UIView {
     
     @objc private func handleTap(gesture: UITapGestureRecognizer) {
         
-        let tapLocation = gesture.location(in: nil)
-        // not sure that frame.width/2 make correct division of the screen
+        let tapLocation = gesture.location(in: self)
         let shouldAdvanceNextPhoto = tapLocation.x > frame.width / 2 ? true : false
         if shouldAdvanceNextPhoto {
             cardViewModel.goToNextPhoto()
