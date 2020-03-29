@@ -34,6 +34,7 @@ class RegistrationVC: UIViewController {
         textField.backgroundColor = .white
         textField.placeholder = "Enter email"
         textField.keyboardType = .emailAddress
+        textField.autocorrectionType = .no // keyboard height is less because of missing autocorrect section
         textField.layer.cornerRadius = 25
         return textField
     }()
@@ -42,7 +43,7 @@ class RegistrationVC: UIViewController {
        let textField = SMTextField()
         textField.backgroundColor = .white
         textField.placeholder = "Enter password"
-        textField.isSecureTextEntry = true
+        textField.isSecureTextEntry = true // keyboardWillShowNotification called twice, first time with to no changes for keyboard frame (stays out of view) and different values to compare with second call
         textField.layer.cornerRadius = 25
         return textField
     }()
@@ -58,16 +59,72 @@ class RegistrationVC: UIViewController {
         return button
     }()
     
+    var stackView = UIStackView()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureGradientLayer()
         configureStackView()
+        setupNotificationObservers()
+        setupTabGesture()
     }
-
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self) // ! prevent retain cycle
+    }
+    
+    
+    private func setupTabGesture() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        view.addGestureRecognizer(tap)
+    }
+    
+    
+    @objc private func handleTap() {
+        self.view.endEditing(true)
+        
+    }
+    
+    
+    private func setupNotificationObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    
+    @objc private func handleKeyboardShow(notification: Notification) {
+        /*
+        guard let value = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+        let keyboardFrame = value.cgRectValue
+        */
+        
+        
+        // need to compare those values to avoid glitch with showing keyboard specifically for password type otherwise can user code above
+        let userInfo = notification.userInfo
+        guard
+            let keyboardFrameBeginValue = userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue,
+            let keyboardFrameEndValue = userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue,
+            keyboardFrameBeginValue.cgRectValue != keyboardFrameEndValue.cgRectValue else { return }
+        
+        let bottomSpace = view.frame.height - stackView.frame.origin.y - stackView.frame.height
+        let distance = keyboardFrameEndValue.cgRectValue.height - bottomSpace
+        
+        self.view.transform = CGAffineTransform(translationX: 0, y: -distance - 8)
+    }
+    
+    
+    @objc private func handleKeyboardHide() {
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            self.view.transform = .identity
+        })
+    }
+    
     
     private func configureStackView() {
-        let stackView = UIStackView(arrangedSubviews: [selectPhotoButton, fullNameTextField, emailTextField, passwordTextField, registerButton])
+        stackView = UIStackView(arrangedSubviews: [selectPhotoButton, fullNameTextField, emailTextField, passwordTextField, registerButton])
         view.addSubview(stackView)
         stackView.axis = .vertical
         stackView.spacing = 8
