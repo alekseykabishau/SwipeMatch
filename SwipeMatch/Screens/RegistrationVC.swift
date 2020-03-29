@@ -58,10 +58,15 @@ class RegistrationVC: UIViewController {
         return button
     }()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureGradientLayer()
-        
+        configureStackView()
+    }
+
+    
+    private func configureStackView() {
         let stackView = UIStackView(arrangedSubviews: [selectPhotoButton, fullNameTextField, emailTextField, passwordTextField, registerButton])
         view.addSubview(stackView)
         stackView.axis = .vertical
