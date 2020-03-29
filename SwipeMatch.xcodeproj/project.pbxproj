@@ -17,6 +17,8 @@
 		5B489F6F2426B96C00FD9222 /* Extensions+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B489F6E2426B96C00FD9222 /* Extensions+UIView.swift */; };
 		5B642E702427D7B5008C5D35 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B642E6F2427D7B5008C5D35 /* CardView.swift */; };
 		5B6534AA242ADE3100921D51 /* Advertiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6534A9242ADE3100921D51 /* Advertiser.swift */; };
+		5BA57461242FE8D80031A846 /* RegistrationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA57460242FE8D80031A846 /* RegistrationVC.swift */; };
+		5BA57464243004A60031A846 /* SMTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA57463243004A60031A846 /* SMTextField.swift */; };
 		5BB8C3922429A0A100B9C0D8 /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB8C3912429A0A100B9C0D8 /* CardViewModel.swift */; };
 		5BD5EF2B2426CC6400F983EC /* HomeButtomControlsStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD5EF2A2426CC6400F983EC /* HomeButtomControlsStackView.swift */; };
 		5BD5EF2D2426DBE500F983EC /* TopNavigationStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD5EF2C2426DBE500F983EC /* TopNavigationStackView.swift */; };
@@ -35,6 +37,8 @@
 		5B489F6E2426B96C00FD9222 /* Extensions+UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extensions+UIView.swift"; sourceTree = "<group>"; };
 		5B642E6F2427D7B5008C5D35 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		5B6534A9242ADE3100921D51 /* Advertiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Advertiser.swift; sourceTree = "<group>"; };
+		5BA57460242FE8D80031A846 /* RegistrationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationVC.swift; sourceTree = "<group>"; };
+		5BA57463243004A60031A846 /* SMTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMTextField.swift; sourceTree = "<group>"; };
 		5BB8C3912429A0A100B9C0D8 /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
 		5BD5EF2A2426CC6400F983EC /* HomeButtomControlsStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeButtomControlsStackView.swift; sourceTree = "<group>"; };
 		5BD5EF2C2426DBE500F983EC /* TopNavigationStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNavigationStackView.swift; sourceTree = "<group>"; };
@@ -106,6 +110,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		5BA574622430048C0031A846 /* TextFields */ = {
+			isa = PBXGroup;
+			children = (
+				5BA57463243004A60031A846 /* SMTextField.swift */,
+			);
+			path = TextFields;
+			sourceTree = "<group>";
+		};
 		5BB8C3902429A08900B9C0D8 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -117,6 +129,7 @@
 		5BD5EF292426CC3600F983EC /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				5BA574622430048C0031A846 /* TextFields */,
 				5BD5EF2C2426DBE500F983EC /* TopNavigationStackView.swift */,
 				5BD5EF2A2426CC6400F983EC /* HomeButtomControlsStackView.swift */,
 				5B642E6F2427D7B5008C5D35 /* CardView.swift */,
@@ -140,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				5B489F5E2426B56D00FD9222 /* HomeVC.swift */,
+				5BA57460242FE8D80031A846 /* RegistrationVC.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -221,8 +235,10 @@
 				5B489F5B2426B56D00FD9222 /* AppDelegate.swift in Sources */,
 				5BD5EF2B2426CC6400F983EC /* HomeButtomControlsStackView.swift in Sources */,
 				5B08A08224284BBF00C073F8 /* User.swift in Sources */,
+				5BA57461242FE8D80031A846 /* RegistrationVC.swift in Sources */,
 				5BD5EF2D2426DBE500F983EC /* TopNavigationStackView.swift in Sources */,
 				5B489F6F2426B96C00FD9222 /* Extensions+UIView.swift in Sources */,
+				5BA57464243004A60031A846 /* SMTextField.swift in Sources */,
 				5B489F5D2426B56D00FD9222 /* SceneDelegate.swift in Sources */,
 				5BB8C3922429A0A100B9C0D8 /* CardViewModel.swift in Sources */,
 			);
