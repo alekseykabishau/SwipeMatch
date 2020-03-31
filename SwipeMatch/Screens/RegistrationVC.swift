@@ -26,6 +26,7 @@ class RegistrationVC: UIViewController {
         textField.backgroundColor = .white
         textField.placeholder = "Enter full name"
         textField.layer.cornerRadius = 25
+        textField.addTarget(self, action: #selector(handleTextChange(textField:)), for: .editingChanged)
         return textField
     }()
     
@@ -36,6 +37,7 @@ class RegistrationVC: UIViewController {
         textField.keyboardType = .emailAddress
         textField.autocorrectionType = .no // keyboard height is less because of missing autocorrect section
         textField.layer.cornerRadius = 25
+        textField.addTarget(self, action: #selector(handleTextChange(textField:)), for: .editingChanged)
         return textField
     }()
     
@@ -45,14 +47,16 @@ class RegistrationVC: UIViewController {
         textField.placeholder = "Enter password"
         textField.isSecureTextEntry = true // keyboardWillShowNotification called twice, first time with to no changes for keyboard frame (stays out of view) and different values to compare with second call
         textField.layer.cornerRadius = 25
+        textField.addTarget(self, action: #selector(handleTextChange(textField:)), for: .editingChanged)
         return textField
     }()
     
     let registerButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Register", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .systemPink
+        button.backgroundColor = .lightGray
+        button.setTitleColor(.darkGray, for: .disabled)
+        button.isEnabled = false
         button.heightAnchor.constraint(equalToConstant: 50).isActive = true
         button.layer.cornerRadius = 25
         button.clipsToBounds = true
@@ -74,6 +78,29 @@ class RegistrationVC: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self) // ! prevent retain cycle
+    }
+    
+    
+    @objc private func handleTextChange(textField: UITextField) {
+
+        if textField == fullNameTextField {
+            print("full name is editing")
+        } else if textField == emailTextField {
+            print("email is editing")
+        } else if textField == passwordTextField {
+            print("password is editing")
+        }
+        
+        let isFormValid: Bool = fullNameTextField.text?.isEmpty == false && emailTextField.text?.isEmpty == false &&  passwordTextField.text?.isEmpty == false
+        
+        registerButton.isEnabled = isFormValid
+        if isFormValid {
+            registerButton.setTitleColor(.white, for: .normal)
+            registerButton.backgroundColor = .systemPink
+        } else {
+            registerButton.backgroundColor = .lightGray
+            registerButton.setTitleColor(.darkGray, for: .disabled)
+        }
     }
     
     
