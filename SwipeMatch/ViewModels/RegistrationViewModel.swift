@@ -14,8 +14,11 @@ class RegistrationViewModel {
     var email: String? { didSet { checkFormValidity() } }
     var password: String? { didSet { checkFormValidity() } }
     
+    var image: UIImage? { didSet { imageObserver?(image) } }
+    
     // reactive programming
     var isFormValidObserver: ((Bool) -> Void)?
+    var imageObserver: ((UIImage?) -> Void)?
     
     
     private func checkFormValidity() {

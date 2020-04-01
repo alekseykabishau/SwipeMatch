@@ -19,6 +19,9 @@ class RegistrationVC: UIViewController {
         button.setTitleColor(.black, for: .normal)
         button.heightAnchor.constraint(equalToConstant: 250).isActive = true
         button.layer.cornerRadius = 16
+        button.imageView?.contentMode = .scaleAspectFill
+        button.clipsToBounds = true
+        button.addTarget(self, action: #selector(handleSelectPhoto), for: .touchUpInside)
         return button
     }()
     
@@ -86,6 +89,7 @@ class RegistrationVC: UIViewController {
     
     
     private func setupRegistrationViewModelObserver() {
+        
         registrationViewModel.isFormValidObserver = { [weak self] isFormValid in
             guard let self = self else { return }
             self.registerButton.isEnabled = isFormValid
@@ -97,6 +101,18 @@ class RegistrationVC: UIViewController {
                 self.registerButton.backgroundColor = .lightGray
             }
         }
+        
+        registrationViewModel.imageObserver = { [weak self] image in
+            guard let self = self else { return }
+            self.selectPhotoButton.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
+        }
+    }
+    
+    
+    @objc private func handleSelectPhoto() {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        present(imagePickerController, animated: true)
     }
     
     
@@ -192,5 +208,20 @@ class RegistrationVC: UIViewController {
         gradientLayer.locations = [0, 1]
         view.layer.addSublayer(gradientLayer)
         gradientLayer.frame = view.bounds
+    }
+}
+
+
+extension RegistrationVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let image = info[.originalImage] as? UIImage
+        registrationViewModel.image = image
+        dismiss(animated: true)
+    }
+    
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true)
     }
 }
