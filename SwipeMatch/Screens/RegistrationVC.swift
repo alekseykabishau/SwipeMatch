@@ -45,6 +45,7 @@ class RegistrationVC: UIViewController {
        let textField = SMTextField()
         textField.backgroundColor = .white
         textField.placeholder = "Enter password"
+        textField.textContentType = .oneTimeCode // otherwise strong password shows
         textField.isSecureTextEntry = true // keyboardWillShowNotification called twice, first time with to no changes for keyboard frame (stays out of view) and different values to compare with second call
         textField.layer.cornerRadius = 25
         textField.addTarget(self, action: #selector(handleTextChange(textField:)), for: .editingChanged)
@@ -64,7 +65,7 @@ class RegistrationVC: UIViewController {
     }()
     
     var stackView = UIStackView()
-    
+    let registrationViewModel = RegistrationViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,6 +73,7 @@ class RegistrationVC: UIViewController {
         configureStackView()
         setupNotificationObservers()
         setupTabGesture()
+        setupRegistrationViewModelObserver()
     }
     
     
@@ -81,25 +83,30 @@ class RegistrationVC: UIViewController {
     }
     
     
+    private func setupRegistrationViewModelObserver() {
+        registrationViewModel.isFormValidObserver = { [weak self] isFormValid in
+            print(isFormValid)
+            guard let self = self else { return }
+            self.registerButton.isEnabled = isFormValid
+            if isFormValid {
+                self.registerButton.setTitleColor(.white, for: .normal)
+                self.registerButton.backgroundColor = .systemPink
+            } else {
+                self.registerButton.setTitleColor(.darkGray, for: .disabled)
+                self.registerButton.backgroundColor = .lightGray
+            }
+        }
+    }
+    
+    
     @objc private func handleTextChange(textField: UITextField) {
 
         if textField == fullNameTextField {
-            print("full name is editing")
+            registrationViewModel.fullname = textField.text ?? ""
         } else if textField == emailTextField {
-            print("email is editing")
+            registrationViewModel.email = textField.text
         } else if textField == passwordTextField {
-            print("password is editing")
-        }
-        
-        let isFormValid: Bool = fullNameTextField.text?.isEmpty == false && emailTextField.text?.isEmpty == false &&  passwordTextField.text?.isEmpty == false
-        
-        registerButton.isEnabled = isFormValid
-        if isFormValid {
-            registerButton.setTitleColor(.white, for: .normal)
-            registerButton.backgroundColor = .systemPink
-        } else {
-            registerButton.backgroundColor = .lightGray
-            registerButton.setTitleColor(.darkGray, for: .disabled)
+            registrationViewModel.password = textField.text
         }
     }
     
