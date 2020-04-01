@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class RegistrationVC: UIViewController {
     
@@ -61,6 +62,7 @@ class RegistrationVC: UIViewController {
         button.heightAnchor.constraint(equalToConstant: 50).isActive = true
         button.layer.cornerRadius = 25
         button.clipsToBounds = true
+        button.addTarget(self, action: #selector(handleRegister), for: .touchUpInside)
         return button
     }()
     
@@ -95,6 +97,21 @@ class RegistrationVC: UIViewController {
                 self.registerButton.setTitleColor(.darkGray, for: .disabled)
                 self.registerButton.backgroundColor = .lightGray
             }
+        }
+    }
+    
+    
+    @objc private func handleRegister() {
+        self.handleTap()
+        guard let email = emailTextField.text else { return }
+        guard let password = emailTextField.text else { return }
+        
+        Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
+            if let error = error {
+                print(error)
+                return
+            }
+            print("success: \(result?.user.uid ?? "")")
         }
     }
     
