@@ -74,7 +74,7 @@ class RegistrationVC: UIViewController {
         configureGradientLayer()
         configureStackView()
         setupNotificationObservers()
-        setupTabGesture()
+        setupTapGesture()
         setupRegistrationViewModelObserver()
     }
     
@@ -87,7 +87,6 @@ class RegistrationVC: UIViewController {
     
     private func setupRegistrationViewModelObserver() {
         registrationViewModel.isFormValidObserver = { [weak self] isFormValid in
-            print(isFormValid)
             guard let self = self else { return }
             self.registerButton.isEnabled = isFormValid
             if isFormValid {
@@ -128,7 +127,7 @@ class RegistrationVC: UIViewController {
     }
     
     
-    private func setupTabGesture() {
+    private func setupTapGesture() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         view.addGestureRecognizer(tap)
     }
