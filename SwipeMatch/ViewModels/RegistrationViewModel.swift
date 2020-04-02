@@ -8,21 +8,29 @@
 
 import UIKit
 
+class Bindable<T> {
+    
+    var observer: ((T?) -> Void)?
+    var value: T? { didSet { observer?(value) } }
+    
+    func bind(observer: @escaping (T?) -> Void) {
+        self.observer = observer
+    }
+}
+
 class RegistrationViewModel {
     
     var fullname: String? { didSet { checkFormValidity() } }
     var email: String? { didSet { checkFormValidity() } }
     var password: String? { didSet { checkFormValidity() } }
     
-    var image: UIImage? { didSet { imageObserver?(image) } }
-    
-    // reactive programming
-    var isFormValidObserver: ((Bool) -> Void)?
-    var imageObserver: ((UIImage?) -> Void)?
+    var bindableImage = Bindable<UIImage>()
+    var bindableIsFormValid = Bindable<Bool>()
     
     
     private func checkFormValidity() {
         let isFormValid = fullname?.isEmpty == false && email?.isEmpty == false && password?.isEmpty == false
-        isFormValidObserver?(isFormValid)
+        
+        bindableIsFormValid.value = isFormValid
     }
 }

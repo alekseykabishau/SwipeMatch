@@ -90,8 +90,9 @@ class RegistrationVC: UIViewController {
     
     private func setupRegistrationViewModelObserver() {
         
-        registrationViewModel.isFormValidObserver = { [weak self] isFormValid in
+        registrationViewModel.bindableIsFormValid.bind { [weak self] isFormValid in
             guard let self = self else { return }
+            guard let isFormValid = isFormValid else { return }
             self.registerButton.isEnabled = isFormValid
             if isFormValid {
                 self.registerButton.setTitleColor(.white, for: .normal)
@@ -102,7 +103,7 @@ class RegistrationVC: UIViewController {
             }
         }
         
-        registrationViewModel.imageObserver = { [weak self] image in
+        registrationViewModel.bindableImage.bind { [weak self] (image) in
             guard let self = self else { return }
             self.selectPhotoButton.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
         }
@@ -216,7 +217,8 @@ extension RegistrationVC: UIImagePickerControllerDelegate, UINavigationControlle
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let image = info[.originalImage] as? UIImage
-        registrationViewModel.image = image
+        //registrationViewModel.image = image
+        registrationViewModel.bindableImage.value = image
         dismiss(animated: true)
     }
     
