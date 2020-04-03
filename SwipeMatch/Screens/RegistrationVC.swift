@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Firebase
 
 class RegistrationVC: UIViewController {
     
@@ -119,36 +118,8 @@ class RegistrationVC: UIViewController {
     
     @objc private func handleRegister() {
         self.handleTap()
-        guard let email = emailTextField.text else { return }
-        guard let password = emailTextField.text else { return }
-        
-        Auth.auth().createUser(withEmail: email, password: password) { [weak self] (result, error) in
-            guard let self = self else { return }
-            if let error = error {
-                print(error)
-                return
-            }
-            print("success: \(result?.user.uid ?? "")")
-            
-            guard let imageData = self.registrationViewModel.bindableImage.value?.jpegData(compressionQuality: 0.75) else { return }
-            
-            let filename = UUID().uuidString
-            let reference = Storage.storage().reference(withPath: "/images/\(filename)")
-            reference.putData(imageData, metadata: nil) { (_, error) in
-                if let error = error {
-                    print(error)
-                    return
-                }
-                print("image upload is completed")
-                
-                reference.downloadURL { (url, error) in
-                    if let error = error {
-                        print(error)
-                        return
-                    }
-                    print(url?.absoluteString ?? "")
-                }
-            }
+        registrationViewModel.performRegistration { (error) in
+            print("Something went wrong: \(error)")
         }
     }
     
