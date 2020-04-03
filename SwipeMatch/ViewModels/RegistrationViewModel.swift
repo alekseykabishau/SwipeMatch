@@ -27,6 +27,7 @@ class RegistrationViewModel {
     
     var bindableImage = Bindable<UIImage>()
     var bindableIsFormValid = Bindable<Bool>()
+    var bindableIsRegistering = Bindable<Bool>()
     
     
     private func checkFormValidity() {
@@ -36,13 +37,15 @@ class RegistrationViewModel {
     }
     
     
-    func performRegistration(completed: @escaping ((Error) -> Void)) {
+    func performRegistration(completed: @escaping ((Error?) -> Void)) {
         guard let email = email, let password = password else { return }
         
+        bindableIsRegistering.value = true
         Auth.auth().createUser(withEmail: email, password: password) { [weak self] (result, error) in
             
             guard let self = self else { return }
             if let error = error {
+                self.bindableIsRegistering.value = false
                 completed(error)
                 return
             }
@@ -55,6 +58,7 @@ class RegistrationViewModel {
             let reference = Storage.storage().reference(withPath: "/images/\(filename)")
             reference.putData(imageData, metadata: nil) { (_, error) in
                 if let error = error {
+                    self.bindableIsRegistering.value = false
                     completed(error)
                     return
                 }
@@ -66,6 +70,8 @@ class RegistrationViewModel {
                         return
                     }
                     print(url?.absoluteString ?? "For some reason URL is not avalable")
+                    self.bindableIsRegistering.value = false
+                    completed(nil)
                 }
             }
         }

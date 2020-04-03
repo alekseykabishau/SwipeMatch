@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import JGProgressHUD
 
 class RegistrationVC: UIViewController {
     
@@ -71,6 +72,13 @@ class RegistrationVC: UIViewController {
     var stackView = UIStackView()
     let registrationViewModel = RegistrationViewModel()
     
+    let registeringHUD: JGProgressHUD = {
+        let hud = JGProgressHUD(style: .dark)
+        hud.textLabel.text = "Registering"
+        return hud
+    }()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureGradientLayer()
@@ -106,6 +114,16 @@ class RegistrationVC: UIViewController {
             guard let self = self else { return }
             self.selectPhotoButton.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
         }
+        
+        registrationViewModel.bindableIsRegistering.bind { [weak self] (isRegistering) in
+            guard let self = self else { return }
+            guard let isRegistering = isRegistering else { return }
+            if isRegistering {
+                self.registeringHUD.show(in: self.view)
+            } else {
+                self.registeringHUD.dismiss()
+            }
+        }
     }
     
     
@@ -119,6 +137,7 @@ class RegistrationVC: UIViewController {
     @objc private func handleRegister() {
         self.handleTap()
         registrationViewModel.performRegistration { (error) in
+            guard let error = error else { return }
             print("Something went wrong: \(error)")
         }
     }
