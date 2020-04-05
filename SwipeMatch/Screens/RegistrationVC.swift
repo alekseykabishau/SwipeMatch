@@ -137,7 +137,9 @@ class RegistrationVC: UIViewController {
     @objc private func handleRegister() {
         self.handleTap()
         registrationViewModel.performRegistration { (error) in
-            guard let error = error else { return }
+            guard let error = error else {
+                print("success")
+                return }
             print("Something went wrong: \(error)")
         }
     }

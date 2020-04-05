@@ -38,9 +38,10 @@ class RegistrationViewModel {
     
     
     func performRegistration(completed: @escaping ((Error?) -> Void)) {
-        guard let email = email, let password = password else { return }
         
+        guard let email = email, let password = password else { return }
         bindableIsRegistering.value = true
+        
         Auth.auth().createUser(withEmail: email, password: password) { [weak self] (result, error) in
             
             guard let self = self else { return }
@@ -52,27 +53,31 @@ class RegistrationViewModel {
             
             print("Success: \(result?.user.uid ?? "No UID is available")")
             
-            guard let imageData = self.bindableImage.value?.jpegData(compressionQuality: 0.75) else { return }
+            self.saveImageToFirestore(completed: completed)
+        }
+    }
+    
+    private func saveImageToFirestore(completed: @escaping (Error?) -> Void) {
+        
+        guard let imageData = self.bindableImage.value?.jpegData(compressionQuality: 0.75) else { return }
+        let filename = UUID().uuidString
+        let reference = Storage.storage().reference(withPath: "/images/\(filename)")
+        reference.putData(imageData, metadata: nil) { (_, error) in
+            if let error = error {
+                self.bindableIsRegistering.value = false
+                completed(error)
+                return
+            }
+            print("Image upload has been completed")
             
-            let filename = UUID().uuidString
-            let reference = Storage.storage().reference(withPath: "/images/\(filename)")
-            reference.putData(imageData, metadata: nil) { (_, error) in
+            reference.downloadURL { (url, error) in
                 if let error = error {
-                    self.bindableIsRegistering.value = false
                     completed(error)
                     return
                 }
-                print("Image upload has been completed")
-                
-                reference.downloadURL { (url, error) in
-                    if let error = error {
-                        completed(error)
-                        return
-                    }
-                    print(url?.absoluteString ?? "For some reason URL is not avalable")
-                    self.bindableIsRegistering.value = false
-                    completed(nil)
-                }
+                print(url?.absoluteString ?? "For some reason URL is not avalable")
+                self.bindableIsRegistering.value = false
+                completed(nil)
             }
         }
     }
