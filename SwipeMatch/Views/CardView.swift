@@ -7,12 +7,17 @@
 //
 
 import UIKit
+import SDWebImage
 
 class CardView: UIView {
     
     var cardViewModel: CardViewModel! {
         didSet {
-            imageView.image = UIImage(named: cardViewModel.imageNames.first ?? "")
+            
+            if let url = URL(string: cardViewModel.imageNames.first ?? "") {
+                imageView.sd_setImage(with: url)
+            }
+            
             infoLabel.attributedText = cardViewModel.attributedString
             infoLabel.textAlignment = cardViewModel.textAlignment
             

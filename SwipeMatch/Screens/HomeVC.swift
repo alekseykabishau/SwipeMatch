@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class HomeVC: UIViewController {
     
@@ -14,24 +15,34 @@ class HomeVC: UIViewController {
     let cardDeckView = UIView()
     let buttonsStackView = HomeButtomControlsStackView()
     
-    let cardViewModels: [CardViewModel] = {
-        let producers = [
-        User(name: "Kelly", age: 23, profession: "Music DJ", imageNames: ["kelly1", "kelly2", "kelly3"]),
-        User(name: "Jane", age: 18, profession: "Teacher", imageNames: ["jane1", "jane2", "jane3"]),
-        Advertiser(title: "Slide Out Menu", brandName: "Let's Build That App", posterPhotoName: "slide_out_menu_poster"),
-        User(name: "Jane", age: 18, profession: "Teacher", imageNames: ["jane1", "jane2", "jane3"])
-        ] as [ProducesCardViewModel]
-        
-        let viewModels = producers.map { return $0.toCardViewModel() }
-        return viewModels
-    }()
+    var cardViewModels = [CardViewModel]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         configureStackView()
-        setupDummyCards()
+        fetchUsersFromFirestore()
     }
+    
+    
+    func fetchUsersFromFirestore() {
+        Firestore.firestore().collection("users").getDocuments { (snapshot, error) in
+            if let error = error {
+                print("snapshot error: \(error)")
+                return
+            }
+            
+            snapshot?.documents.forEach({ (documentSnapshot) in
+                let userData = documentSnapshot.data()
+                let user = User(dictionary: userData)
+                self.cardViewModels.append(user.toCardViewModel())
+                print(user)
+            })
+            
+            self.setupDummyCards()
+        }
+    }
+    
     
     private func setupDummyCards() {
         
