@@ -68,17 +68,32 @@ class RegistrationViewModel {
                 completed(error)
                 return
             }
-            print("Image upload has been completed")
             
             reference.downloadURL { (url, error) in
                 if let error = error {
                     completed(error)
                     return
                 }
-                print(url?.absoluteString ?? "For some reason URL is not avalable")
-                self.bindableIsRegistering.value = false
-                completed(nil)
+                
+                let imageUrl = url?.absoluteString ?? ""
+                self.saveUserInfoToFirestore(imageUrl: imageUrl, completed: completed)
             }
+        }
+    }
+    
+    
+    private func saveUserInfoToFirestore(imageUrl: String, completed: @escaping ((Error?) -> Void)) {
+        
+        let uid = Auth.auth().currentUser?.uid ?? ""
+        let userData = ["fullname": fullname ?? "", "uid": uid, "imageUrl1": imageUrl]
+        
+        Firestore.firestore().collection("users").document(uid).setData(userData) { (error) in
+            self.bindableIsRegistering.value = false
+            if let error = error {
+                completed(error)
+                return
+            }
+            completed(nil)
         }
     }
 }
