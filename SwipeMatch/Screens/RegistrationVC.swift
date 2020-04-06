@@ -49,7 +49,7 @@ class RegistrationVC: UIViewController {
        let textField = SMTextField()
         textField.backgroundColor = .white
         textField.placeholder = "Enter password"
-        textField.textContentType = .oneTimeCode // otherwise strong password shows
+        textField.textContentType = .newPassword
         textField.isSecureTextEntry = true // keyboardWillShowNotification called twice, first time with to no changes for keyboard frame (stays out of view) and different values to compare with second call
         textField.layer.cornerRadius = 25
         textField.addTarget(self, action: #selector(handleTextChange(textField:)), for: .editingChanged)
@@ -138,7 +138,7 @@ class RegistrationVC: UIViewController {
         self.handleTap()
         registrationViewModel.performRegistration { (error) in
             guard let error = error else {
-                print("success")
+                print("success!!!!!!")
                 return }
             print("Something went wrong: \(error)")
         }
