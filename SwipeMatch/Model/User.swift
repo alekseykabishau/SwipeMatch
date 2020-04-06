@@ -35,6 +35,6 @@ struct User: ProducesCardViewModel {
         let professionString = profession != nil ? String(profession!) : "Not Available"
         attributedText.append(NSAttributedString(string: "\n\(professionString)", attributes: [.font: UIFont.systemFont(ofSize: 20, weight: .regular)]))
         
-        return CardViewModel(imageNames: [imageUrl1 ?? ""], attributedString: attributedText, textAlignment: .left)
+        return CardViewModel(imageURLs: [imageUrl1 ?? ""], attributedString: attributedText, textAlignment: .left)
     }
 }

@@ -39,12 +39,12 @@ class HomeVC: UIViewController {
                 print(user)
             })
             
-            self.setupDummyCards()
+            self.setupCards()
         }
     }
     
     
-    private func setupDummyCards() {
+    private func setupCards() {
         
         cardViewModels.forEach { (cardViewModel) in
             let cardView = CardView(frame: .zero)
