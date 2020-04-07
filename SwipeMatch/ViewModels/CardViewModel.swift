@@ -22,13 +22,13 @@ class CardViewModel {
     // view model is supposed to represent the STATE of our View
     private var imageIndex = 0 {
         didSet {
-            let image = UIImage(named: imageURLs[imageIndex])
-            imageIndexObserver?(imageIndex, image)
+            let imageUrl = imageURLs[imageIndex]
+            imageIndexObserver?(imageIndex, imageUrl)
         }
     }
     
     // reactive programming
-    var imageIndexObserver: ((Int, UIImage?) -> Void)?
+    var imageIndexObserver: ((Int, String?) -> Void)?
     
     
     init(imageURLs: [String], attributedString: NSAttributedString, textAlignment: NSTextAlignment) {

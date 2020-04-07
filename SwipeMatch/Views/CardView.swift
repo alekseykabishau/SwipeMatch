@@ -28,10 +28,12 @@ class CardView: UIView {
             }
             barsStackView.arrangedSubviews.first?.backgroundColor = .white
             
-            cardViewModel.imageIndexObserver = { [weak self] (imageIndex, image) in
+            cardViewModel.imageIndexObserver = { [weak self] (imageIndex, imageUrl) in
                 guard let self = self else { return }
-                print("changing photo from view model")
-                self.imageView.image = image
+                
+                if let url = URL(string: imageUrl ?? "") {
+                    self.imageView.sd_setImage(with: url)
+                }
                 
                 self.barsStackView.arrangedSubviews.forEach { $0.backgroundColor = Color.barDeselectedColor }
                 self.barsStackView.arrangedSubviews[imageIndex].backgroundColor = .white
